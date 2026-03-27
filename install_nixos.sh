@@ -28,13 +28,20 @@ DRIVE="/dev/vda"
 #mkdir -p /mnt/boot
 #mount /dev/disk/by-label/boot /mnt/boot
 
+
 # Habilitar flakes temporalmente en la ISO
 export NIX_CONFIG="experimental-features = nix-command flakes"
 
 # Ejecutar disko
+echo "${blue}###############################################################################${reset}"
+echo "${blue} Deploying disko for disk partitions and mounting filesystem ${reset}"
+echo "${blue}###############################################################################${reset}"
 nix run github:nix-community/disko -- --mode zap_create_mount ./disko-config.nix
 
 # 5. Generar configuración base
+echo "${blue}###############################################################################${reset}"
+echo "${blue} Generating default configuration for NIXOS${reset}"
+echo "${blue}###############################################################################${reset}"
 nixos-generate-config --root /mnt
 
 # 6. (Opcional) Sobrescribir con tu propia configuración o Flake
@@ -42,10 +49,17 @@ nixos-generate-config --root /mnt
 # nix-shell -p git --run "git clone https://github.com/tu-usuario/nixos-config /mnt/etc/nixos"
 
 # 7. Instalar
-nixos-install --no-root-passwd
+echo "${blue}###############################################################################${reset}"
+echo "${blue} Installing NIXOS${reset}"
+echo "${blue}###############################################################################${reset}"
+read -r -p "Want to reboot the system? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+    nixos-install --no-root-passwd
+fi
 
 echo "${green}###############################################################################${reset}"
-echo "${green} Installing and pre configuration complete !!!! ${reset}"
+echo "${green} Installation and pre configuration complete !!!! ${reset}"
 echo "${green}###############################################################################${reset}"
 
 echo "${red}###############################################################################${reset}"
