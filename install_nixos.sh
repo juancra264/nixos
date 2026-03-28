@@ -42,7 +42,7 @@ nix run github:nix-community/disko -- --mode zap_create_mount ./disko-config.nix
 #echo "${blue}###############################################################################${reset}"
 #echo "${blue} Generating default configuration for NIXOS${reset}"
 #echo "${blue}###############################################################################${reset}"
-#nixos-generate-config --root /mnt
+nixos-generate-config --root /mnt
 
 #boot.loader.systemd-boot.enable = false;
 #boot.loader.grub.enable = true;
@@ -54,7 +54,7 @@ nix run github:nix-community/disko -- --mode zap_create_mount ./disko-config.nix
 # Si tienes un repositorio de dotfiles:
 # nix-shell -p git --run "git clone https://github.com/tu-usuario/nixos-config /mnt/etc/nixos"
 
-cp configuration.nix /mnt/etc/nixos
+#cp configuration.nix /mnt/etc/nixos
 
 # Instalar
 echo "${blue}###############################################################################${reset}"
