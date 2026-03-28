@@ -38,25 +38,38 @@ echo "${blue} Deploying disko for disk partitions and mounting filesystem ${rese
 echo "${blue}###############################################################################${reset}"
 nix run github:nix-community/disko -- --mode zap_create_mount ./disko-config.nix
 
-# 5. Generar configuración base
-echo "${blue}###############################################################################${reset}"
-echo "${blue} Generating default configuration for NIXOS${reset}"
-echo "${blue}###############################################################################${reset}"
-nixos-generate-config --root /mnt
+# Generar configuración base
+#echo "${blue}###############################################################################${reset}"
+#echo "${blue} Generating default configuration for NIXOS${reset}"
+#echo "${blue}###############################################################################${reset}"
+#nixos-generate-config --root /mnt
 
-# 6. (Opcional) Sobrescribir con tu propia configuración o Flake
+#boot.loader.systemd-boot.enable = false;
+#boot.loader.grub.enable = true;
+#boot.loader.grub.device = "nodev";
+#boot.loader.grub.efiSupport = true;
+#boot.loader.efi.efiSysMountPoint = "/boot";
+
+# (Opcional) Sobrescribir con tu propia configuración o Flake
 # Si tienes un repositorio de dotfiles:
 # nix-shell -p git --run "git clone https://github.com/tu-usuario/nixos-config /mnt/etc/nixos"
 
-# 7. Instalar
+cp configuration.nix /mnt/etc/nixos
+
+# Instalar
 echo "${blue}###############################################################################${reset}"
 echo "${blue} Installing NIXOS${reset}"
 echo "${blue}###############################################################################${reset}"
-read -r -p "Want to reboot the system? [y/N]" -n 1
+read -r -p "Installing NixOS? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     nixos-install --no-root-passwd
 fi
+
+echo "${blue}###############################################################################${reset}"
+echo "${blue} Changing password ${reset}"
+echo "${blue}###############################################################################${reset}"
+nixos-enter --root /mnt -c 'passwd juanramirez'
 
 echo "${green}###############################################################################${reset}"
 echo "${green} Installation and pre configuration complete !!!! ${reset}"
@@ -70,3 +83,4 @@ echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     reboot
 fi
+
