@@ -1,7 +1,6 @@
 # NIXOS operation
 
-
-## Install configuration 
+## Install configuration
 
 ```bash
 sudo nixos-rebuild switch

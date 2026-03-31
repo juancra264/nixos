@@ -11,6 +11,23 @@
     userEmail = "juancra264@hotmail.com";
   };
 
+  programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [ "git" "zsh-autosuggestions" ];
+    };
+  };
+
+  services.netbird = {
+    enable = true;
+  };
+
+  services.pcscd = {
+    enable = true;
+  }
+
   programs.home-manager.enable = true;
 
   # Install user-specific packages
@@ -59,5 +76,4 @@
     yubikey-personalization     # For Udev rules
     yubioath-flutter
   ];
-
 }
