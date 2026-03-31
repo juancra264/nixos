@@ -23,7 +23,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.yourusername = import ./home.nix; # Replace 'yourusername'
+          home-manager.users.juanramirez = import ./home.nix; # Replace 'yourusername'
         }
       ];
     };

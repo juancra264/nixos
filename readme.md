@@ -4,14 +4,22 @@
 ## Install configuration 
 
 ```bash
-sudo nix-rebuild switch
+sudo nixos-rebuild switch
 ```
 
 ```bash
-sudo nix-rebuild switch --upgrade
+sudo nixos-rebuild switch --upgrade
 
 ```bash
-sudo nix-rebuild test
+sudo nixos-rebuild switch --flake .#default
+```
+
+```bash
+sudo nixos-rebuild switch --flake .#laptop
+```
+
+```bash
+sudo nixos-rebuild test
 ```
 
 ```bash
