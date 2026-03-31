@@ -5,6 +5,14 @@
   home.homeDirectory = "/home/juanramirez";
   home.stateVersion = "25.11"; 
 
+  programs.git = {
+    enable = true;
+    userName = "juancra264";
+    userEmail = "juancra264@hotmail.com";
+  };
+
+  programs.home-manager.enable = true;
+
   # Install user-specific packages
   home.packages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -52,11 +60,4 @@
     yubioath-flutter
   ];
 
-  programs.git = {
-    enable = true;
-    userName = "juancra264";
-    userEmail = "juancra264@hotmail.com";
-  };
-
-  programs.home-manager.enable = true;
 }
