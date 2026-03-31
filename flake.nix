@@ -3,8 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
-    # 1. Add Home Manager input
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,13 +15,14 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        
-        # 2. Add Home Manager as a system module
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.juanramirez = import ./home.nix; # Replace 'yourusername'
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.juanramirez = import ./home.nix;
+            backupFileExtension = "backup";
+          }
         }
       ];
     };

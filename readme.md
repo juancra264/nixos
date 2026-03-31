@@ -25,3 +25,7 @@ sudo nixos-rebuild test
 ```bash
 sudo nix-collect-garbage --delete-older-than 15d
 ```
+
+```bash
+nix.settings.experimental-features = [ "nix-command" "flakes"];
+```
